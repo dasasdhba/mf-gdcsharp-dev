@@ -1,0 +1,20 @@
+{
+  "profiles": {
+    "Mario Forever GdCSharp Dev": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false,
+      "remoteDebugMachine": "",
+      "authenticationMode": "None"
+    },
+    "Game": {
+      "commandName": "Executable",
+      "executablePath": "D:\\Windows\\Green\\Godot\\Godot_v4.1-stable_mono_win64.exe",
+      "commandLineArgs": "--path $(SolutionDir) > godot.log"
+    },
+    "Game With Console": {
+      "commandName": "Executable",
+      "executablePath": "D:\\Windows\\Green\\Godot\\Godot_v4.1-stable_mono_win64_console.exe",
+      "commandLineArgs": "--path $(SolutionDir)"
+    }
+  }
+}

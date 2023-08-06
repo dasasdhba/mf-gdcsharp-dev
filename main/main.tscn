@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://chkkj46ws8w1t"]
+
+[ext_resource type="Script" path="res://cs/Spawner/Player/MarioSpawner.cs" id="1_nt54k"]
+[ext_resource type="Texture2D" uid="uid://cx7ynmhg3oqhm" path="res://main/icon.svg" id="2_f02qr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0pde"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ppnx"]
+size = Vector2(32, 32)
+
+[node name="Main" type="Node"]
+
+[node name="*TestOnly*" type="Node" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(392, 427)
+scale = Vector2(32.8849, 2.57566)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_u0pde")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(414, 98)
+script = ExtResource("1_nt54k")
+SpawnOnce = true
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(80, 272)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_3ppnx")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_f02qr")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(144, 272)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource("RectangleShape2D_3ppnx")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_f02qr")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(208, 272)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+shape = SubResource("RectangleShape2D_3ppnx")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D4"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_f02qr")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+position = Vector2(16, 272)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+shape = SubResource("RectangleShape2D_3ppnx")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D5"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_f02qr")

@@ -1,0 +1,23 @@
+# Generator document
+
+Here are some godot editor plugins which help generate code or do other repetitive work in this project.
+
+## Asset Code Generator
+
+This is a cs plugin which helps generate cs code packaging some specific resources so that we can easily get access to. Read the base class cs script in `res:\\cs\Asset` for more information.
+
+Currently, this plugin will detect the change of project filesystem and package the resource in:
+
+* `res:\\assets\audio` AudioStream
+* `res:\\assets\texture` Texture2D
+* `res:\\assets\sprite` SpriteFrames
+
+There may be more resource types maintained by this plugin in the future.
+
+The plugin will convert the resource file name to PascalCase and use it as class name, then generate code in `res:\\cs\Asset\Generated`.
+
+If a resource file has been removed or renamed, some generated code may become invalid and the plugin will push a warning. In this case you may adjust some code which references the invalid class and delete the invalid cs file in the Generated folder.
+
+## Spawner-TSCN Generator
+
+This is still a planning item, which may help generate tscn files for concrete spawners so that we can easily use them in level editor.

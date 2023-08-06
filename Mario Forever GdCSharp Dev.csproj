@@ -1,0 +1,26 @@
+<Project Sdk="Godot.NET.Sdk/4.1.0">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>MarioForeverGdCSharpDev</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701; 1702</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ExportDebug|AnyCPU'">
+    <NoWarn>1701; 1702</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ExportRelease|AnyCPU'">
+    <NoWarn>1701; 1702</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+    <None Include="addons\AssetCodeGenerator\plugin.cfg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="cs\Asset\Generated\Audio\" />
+    <Folder Include="cs\Asset\Generated\Sprite\" />
+    <Folder Include="cs\Asset\Generated\Texture\" />
+    <Folder Include="cs\Spawner\Fluid\" />
+  </ItemGroup>
+</Project>
