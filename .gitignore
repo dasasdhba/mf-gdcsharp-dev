@@ -1,4 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
+export_presets.cfg
+
+# visual studio config ignores
 .vs/
 Mario Forever GdCSharp Dev.csproj.user
