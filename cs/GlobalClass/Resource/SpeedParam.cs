@@ -5,7 +5,7 @@ namespace GlobalClass;
 
 /// <summary>
 /// Speed Paramater Resource.
-/// useful for linear motion with two directions.
+/// Useful for linear motion with two directions.
 /// </summary>
 [GlobalClass]
 public partial class SpeedParam : Resource
@@ -52,8 +52,6 @@ public partial class SpeedParam : Resource
     }
 
     public SpeedParam() { }
-
-    public SpeedParam(int direction, float speed) => (Direction, Speed) = (direction, speed);
 
     /// <summary>
     /// Get speed with direction.
