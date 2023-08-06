@@ -27,6 +27,7 @@ public partial class SpeedAccParam : SpeedParam
             }
         }
     }
+
     private int _AccDirection;
 
     /// <summary>
