@@ -14,7 +14,7 @@ public partial class PlayerPlatformerMovement : PlatformerBody2D
     public bool Crouch { get; protected set; } = false;
 
     /// <summary>
-    /// The max height that allows player walk on the floor
+    /// The max height that allows player to walk on the floor
     /// when colliding with a wall and near the floor.
     /// </summary>
     public float OnWallFixLength { get; set; } = 8f;
@@ -45,6 +45,9 @@ public partial class PlayerPlatformerMovement : PlatformerBody2D
 
         Crouch = GlobalData.PlayerState > 0 && MoveActions.Down.Pressed && IsOnFloor();
         
+        // remake behavior of original Mario Forever
+        // it looks strange but that's it
+
         if (!Crouch) { ProcessWalkSpeed(moveDir, run, delta); }
         else { ProcessCrouchSpeed(delta); }
         ProcessStopSpeed(moveDir, run, delta);
@@ -63,6 +66,9 @@ public partial class PlayerPlatformerMovement : PlatformerBody2D
         // process motion
 
         OnChangeShape(GlobalData.PlayerState, Crouch);
+
+        // TODO: Checkup shape change and go to stuck state if necessary
+
         ProcessMotion(delta);
 
         // on wall fix
@@ -75,7 +81,7 @@ public partial class PlayerPlatformerMovement : PlatformerBody2D
             if (!TestMove(TestTransform, new Vector2(0f, 0f)))
             {
                 SetWalkSpeed();
-                GlobalPosition += WalkParam.GetSpeed() * (float)delta * -UpDirection.Orthogonal();
+                GlobalPosition += (float)(WalkParam.GetSpeed() * delta) * -UpDirection.Orthogonal();
                 GlobalPosition += OnWallFixLength * UpDirection;
                 MoveAndCollide((OnWallFixLength + 1) * -UpDirection);
             }

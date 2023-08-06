@@ -148,7 +148,7 @@ public partial class PlayerPlatformerMovement : PlatformerBody2D
                     accFix = JumpAccFixIdle;
                 }
 
-                GravitySpeed -= accFix * (float)delta;
+                GravitySpeed -= (float)(accFix * delta);
             }
         }
     }
