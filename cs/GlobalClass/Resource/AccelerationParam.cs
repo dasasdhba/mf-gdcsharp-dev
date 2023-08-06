@@ -52,6 +52,7 @@ public partial class AccelerationParam : Resource
 
     /// <summary>
     /// Process with SpeedParam.
+    /// Be care of changing <c>SpeedParam.Direction</c> unexpectedly.
     /// </summary>
     public void ProcessSpeed(SpeedParam param, double delta)
     {
