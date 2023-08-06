@@ -78,8 +78,9 @@ public partial class PlayerPlatformerMovement : PlatformerBody2D
     }
 
     /// <summary>
-    /// Convert MF Speed Param to real one.
-    /// See :https://www.marioforever.net/thread-2734-1-1.html for more information.
+    /// Convert MF Speed Param to real one. See
+    /// <see href="https://www.marioforever.net/thread-2734-1-1.html">Mario Forever Community</see>
+    /// for more information.
     /// </summary>
     protected void SetWalkSpeed()
     {
@@ -90,6 +91,7 @@ public partial class PlayerPlatformerMovement : PlatformerBody2D
     /// <summary>
     /// Convert real walk speed to MF Speed Param.
     /// </summary>
+    /// <seealso cref="SetWalkSpeed"/>
     protected void SetMFSpeed()
     {
         MFSpeedParam.Speed = WalkParam.Speed * 8f + 50f;
