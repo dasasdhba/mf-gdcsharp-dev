@@ -12,7 +12,7 @@ namespace Entity.Player;
 public partial class PlayerPlatformer : Player
 {
 	// Components
-	public PlayerPlatformerMovement RootNode { get; set; }
+	public PlayerPlatformerBody RootNode { get; set; }
 	public PlayerInputPlatformer InputHandle { get; set; } = new();
 	public PlayerCollisionShape PlayerShape { get; set; } = new();
 	public OverlapObject2D WaterJumpDetector { get; set; } = new();
@@ -48,7 +48,7 @@ public partial class PlayerPlatformer : Player
     protected override void SetComponents()
 	{
 		// root node
-		RootNode = new PlayerPlatformerMovement()
+		RootNode = new PlayerPlatformerBody()
         {
 			Transform = Transform,
 			GravityParam = new AccelerationParam(2500f, 2500f, 500f),

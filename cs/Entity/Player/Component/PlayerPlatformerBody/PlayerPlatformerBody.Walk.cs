@@ -3,7 +3,7 @@ using System;
 
 namespace Entity.Player;
 
-public partial class PlayerPlatformerMovement : PlatformerBody2D
+public partial class PlayerPlatformerBody : PlatformerBody2D
 {
     // walk method
 

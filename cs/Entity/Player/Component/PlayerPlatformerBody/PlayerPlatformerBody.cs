@@ -8,7 +8,7 @@ namespace Entity.Player;
 /// Player platformer movement component.
 /// Used by PlayerPlatformer.
 /// </summary>
-public partial class PlayerPlatformerMovement : PlatformerBody2D
+public partial class PlayerPlatformerBody : PlatformerBody2D
 {
 
     // dependency components
@@ -26,7 +26,7 @@ public partial class PlayerPlatformerMovement : PlatformerBody2D
     /// </summary>
     public Dictionary<string, PlayerInput.ActionState> Actions { get; set; }
 
-    public PlayerPlatformerMovement() :base() { }
+    public PlayerPlatformerBody() :base() { }
 
     public override void _PhysicsProcess(double delta)
     {

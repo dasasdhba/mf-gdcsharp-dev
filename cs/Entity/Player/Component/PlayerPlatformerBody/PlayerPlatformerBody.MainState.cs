@@ -5,7 +5,7 @@ using Godot;
 
 namespace Entity.Player;
 
-public partial class PlayerPlatformerMovement : PlatformerBody2D
+public partial class PlayerPlatformerBody : PlatformerBody2D
 {
 
     /// <summary>
@@ -19,24 +19,24 @@ public partial class PlayerPlatformerMovement : PlatformerBody2D
     /// </summary>
     public float OnWallFixLength { get; set; } = 8f;
 
-    public StateMachine<PlayerPlatformerMovement> MainStateMachine { get; set; }
+    public StateMachine<PlayerPlatformerBody> MainStateMachine { get; set; }
         = new(MainState);
 
     /// <summary>
     /// The main player state that process general behaviors.
     /// </summary>
-    public static readonly State<PlayerPlatformerMovement> MainState = new()
+    public static readonly State<PlayerPlatformerBody> MainState = new()
     {
-        Process = (PlayerPlatformerMovement obj, double delta) => (
+        Process = (PlayerPlatformerBody obj, double delta) => (
             obj.MainProcess(delta)
         ),
 
-        Enter = (PlayerPlatformerMovement obj, State<PlayerPlatformerMovement> _) => {
+        Enter = (PlayerPlatformerBody obj, State<PlayerPlatformerBody> _) => {
             obj.JumpSpeedInit();
         }
     };
 
-    public State<PlayerPlatformerMovement> MainProcess(double delta)
+    public State<PlayerPlatformerBody> MainProcess(double delta)
     {
         // process walk
 

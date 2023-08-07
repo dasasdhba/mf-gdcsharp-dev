@@ -1,7 +1,7 @@
 ﻿using GlobalClass;
 
 namespace Entity.Player;
-public partial class PlayerPlatformerMovement : PlatformerBody2D
+public partial class PlayerPlatformerBody : PlatformerBody2D
 {
     // event of player platformer movement
     //
