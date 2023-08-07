@@ -30,14 +30,12 @@ public partial class AnimatedSpriteOffset :AnimatedSprite2D
                     if (Frame == param.Frame) 
                     { 
                         Offset = BaseOffset + param.Offset;
-                        break;
+                        return;
                     }
                 }
             }
         }
-        else
-        {
-            Offset = BaseOffset;
-        }
+
+        Offset = BaseOffset;
     }
 }
