@@ -16,6 +16,7 @@ public partial class AnimatedSpriteOffset :AnimatedSprite2D
         TreeEntered += () => BaseOffset = Offset;
         AnimationChanged += SetOffset;
         FrameChanged += SetOffset;
+        SpriteFramesChanged += SetOffset;
     }
 
     protected void SetOffset()
