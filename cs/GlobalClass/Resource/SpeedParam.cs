@@ -57,7 +57,6 @@ public partial class SpeedParam : Resource
     /// Get speed with direction.
     /// </summary>
     /// <param name="useDirection">Whether to use direction.</param>
-    /// <returns></returns>
     public float GetSpeed(bool useDirection = true)
     {
         return useDirection ? Speed * Direction : Speed;
