@@ -13,7 +13,7 @@ public partial class EntityContainer : RefCounted
 
     private Entity2D Entity;
 
-    public EntityContainer(Entity2D entity) => Entity = entity;
+    public EntityContainer(Entity2D entity) : base() => Entity = entity;
 
     public Entity2D GetEntity() => Entity;
 }

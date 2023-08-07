@@ -22,8 +22,8 @@ public partial class AccelerationParam : Resource
     [Export]
     public float MaxSpeed { get; set; } = 500f;
 
-    public AccelerationParam() { }
-    public AccelerationParam(float acc, float dec, float maxSpeed)
+    public AccelerationParam() :base() { }
+    public AccelerationParam(float acc, float dec, float maxSpeed) :base()
     {
         Acceleration = acc;
         Deceleration = dec;

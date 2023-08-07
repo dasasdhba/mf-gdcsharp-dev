@@ -38,7 +38,7 @@ public partial class PlatformerBody2D : CharacterBody2D
     // water detect
     private OverlapCollisionSync2D WaterDetector;
 
-    public PlatformerBody2D()
+    public PlatformerBody2D() : base()
     {
         GravityParam ??= new();
         GravityParamWater ??= new(100f, 2000f, 150f);

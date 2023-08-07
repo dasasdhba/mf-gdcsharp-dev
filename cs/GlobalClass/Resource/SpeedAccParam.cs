@@ -28,7 +28,7 @@ public partial class SpeedAccParam : SpeedParam
         }
     }
 
-    private int _AccDirection;
+    private int _AccDirection = 1;
 
     /// <summary>
     /// The Acceleration Parameter used for processing speed.

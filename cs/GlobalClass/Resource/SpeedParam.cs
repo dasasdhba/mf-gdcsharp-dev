@@ -51,7 +51,7 @@ public partial class SpeedParam : Resource
         }
     }
 
-    public SpeedParam() { }
+    public SpeedParam() : base() { }
 
     /// <summary>
     /// Get speed with direction.

@@ -79,7 +79,7 @@ public abstract partial class Overlapping2D : Node2D
     private uint _CollisionMask = 1;
 
     // init
-    public Overlapping2D()
+    public Overlapping2D() : base()
     {
         OverlapManager2D manager = GetOverlapManager();
         manager.QueryParameters.CollideWithAreas = CollideWithAreas;
