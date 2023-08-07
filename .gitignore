@@ -5,3 +5,7 @@ export_presets.cfg
 # visual studio config ignores
 .vs/
 Mario Forever GdCSharp Dev.csproj.user
+Properties/
+
+# exclude folders
+.exclude/
