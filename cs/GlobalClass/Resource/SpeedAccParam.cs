@@ -39,7 +39,7 @@ public partial class SpeedAccParam : SpeedParam
 
     public SpeedAccParam() : base() => AccParameter ??= new(500f, 500f, 250f);
 
-    public SpeedAccParam(float acceleration, float deceleration, float maxSpeed) =>
+    public SpeedAccParam(float acceleration, float deceleration, float maxSpeed) :base() =>
         AccParameter = new(acceleration, deceleration, maxSpeed);
 
     /// <summary>
