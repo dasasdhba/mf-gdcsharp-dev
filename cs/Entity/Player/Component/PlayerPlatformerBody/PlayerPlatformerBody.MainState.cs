@@ -73,7 +73,7 @@ public partial class PlayerPlatformerBody : PlatformerBody2D
 
         // on wall fix
 
-        if (GravitySpeed >= 0f && OnWallFixLength >= 0f && IsOnWall())
+        if (GravitySpeed >= 0f && OnWallFixLength > 0f && IsOnWall())
         {
             Transform2D TestTransform = GlobalTransform;
             TestTransform.Origin += MFSpeedParam.Direction * -UpDirection.Orthogonal();
