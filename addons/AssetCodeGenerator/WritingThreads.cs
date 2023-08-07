@@ -15,7 +15,7 @@ public partial class AssetCodeGenerator : EditorPlugin
         "TexturePath",
         "res://cs/Asset/Generated/Texture",
         "res://assets/texture",
-        new string[] { "bmp", "dds", "exr", "hdr", "jpg", "jpeg", "png", "tga", "svg", "svgz", "webp" }
+        new string[] { "tres", "bmp", "dds", "exr", "hdr", "jpg", "jpeg", "png", "tga", "svg", "svgz", "webp" }
         );
 
     // sprite frames thread
