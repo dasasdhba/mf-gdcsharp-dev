@@ -32,7 +32,7 @@ project/assembly_name="Mario Forever GdCSharp Dev"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AssetCodeGenerator/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteImporter/plugin.cfg", "res://addons/AssetCodeGenerator/plugin.cfg")
 
 [filesystem]
 
