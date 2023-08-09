@@ -17,7 +17,7 @@ public partial class AssetCodeGenerator : EditorPlugin
             string csStr = FileAccess.GetFileAsString(cspath);
             int left = csStr.IndexOf("res://");
             int right = csStr.IndexOf("\n", left + 1);
-            string respath = csStr.Substring(left, right - left);
+            string respath = csStr[left..right];
             bool changed = false;
             if (respath.EndsWith(';')) 
             { 
@@ -27,15 +27,12 @@ public partial class AssetCodeGenerator : EditorPlugin
 
             if (!FileAccess.FileExists(respath))
             {
-                FileAccess file = FileAccess.Open(cspath, FileAccess.ModeFlags.Write);
-                file.StoreString(
-                    "// Warning: There is no valid resource file at: " + respath + "\n" +
-                    "// Please remove this cs script file.\n"
-                    );
-                file.Close();
+                DirAccess.RemoveAbsolute(ProjectSettings.GlobalizePath(cspath));
+
                 if (changed) { _Changed = true; }
 
-                GD.PushWarning(Annotation + "Warning: Invalid cs asset class at: " + cspath);
+                GD.PushWarning(Annotation + "Warning: Invalid cs asset class at: " 
+                    + cspath + " Has been removed.");
             }
         }
     }

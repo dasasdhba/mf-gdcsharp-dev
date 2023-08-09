@@ -16,7 +16,7 @@ There may be more resource types maintained by this plugin in the future.
 
 The plugin will convert the resource file name to PascalCase and use it as class name, then generate code in `res:\\cs\Asset\Generated`.
 
-If a resource file has been removed or renamed, some generated code may become invalid and the plugin will push a warning. In this case you may adjust some code which references the invalid class and delete the invalid cs file in the Generated folder.
+If a resource file has been removed or renamed, the specific generated cs script file will also be removed. Pay attention to potential invalid references if this happens.
 
 ## Spawner-TSCN Generator
 

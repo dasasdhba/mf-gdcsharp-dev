@@ -7,6 +7,10 @@ using System.Collections.Generic;
 
 namespace Editor.Addon;
 
+/// <summary>
+/// Asset Code Generator that helps generate code.
+/// See <c>res:\\doc\generator.md</c> for more information.
+/// </summary>
 [Tool]
 public partial class AssetCodeGenerator : EditorPlugin
 {
@@ -59,7 +63,9 @@ public partial class AssetCodeGenerator : EditorPlugin
         {
             GD.Print(Annotation + "Updated.");
             _Changed = false;
-            _Skip = true; 
+            _Skip = true;
+
+            GetEditorInterface().GetResourceFilesystem().Scan();
         }
     }
 
@@ -92,22 +98,24 @@ public partial class AssetCodeGenerator : EditorPlugin
         return StringExtensions.ToPascalCase(fileCutExt);
     }
 
-    private static List<string> GetAllFilePath(string dirPath, string[] filter)
+    private static IEnumerable<string> GetAllFilePath(string dirPath, string[] filter)
     {
-        List<string> result = new();
         foreach (string dir in DirAccess.GetDirectoriesAt(dirPath))
         {
-            result.AddRange(GetAllFilePath(dirPath + "/" + dir, filter));
+            foreach (string result in GetAllFilePath(dirPath + "/" + dir, filter))
+            {
+                yield return result;
+            }
         }
         foreach (string file in DirAccess.GetFilesAt(dirPath))
         {
             if (filter.IsEmpty() || Array.Exists(filter, str => str == StringExtensions.GetExtension(file)))
             {
-                result.Add(dirPath + "/" + file);
+                yield return dirPath + "/" + file;
             }
         }
 
-        return result;
+        yield break;
     }
 
     public override void _EnterTree()
