@@ -19,9 +19,10 @@ public partial class AsepriteFrames
         public Dictionary Json { get; set; }
         public string AnimName { get; set; }
         public bool Loop { get; set; }
+        public bool TagOnly { get; set; }
 
-        public FramesInfo(string t, Dictionary j, string a, bool l) =>
-            (TexPath, Json, AnimName, Loop) = (t, j, a, l);
+        public FramesInfo(string t, Dictionary j, string a, bool l, bool tag) =>
+            (TexPath, Json, AnimName, Loop, TagOnly) = (t, j, a, l, tag);
 
     }
 
@@ -44,7 +45,7 @@ public partial class AsepriteFrames
 
         foreach (FramesInfo info in Infos)
         {
-            AddAnimation(spr, info);
+            AddAnimation(spr, info, info.TagOnly);
         }
         
         return spr;

@@ -31,6 +31,6 @@ The importer will auto generate `CompressedTexture2D` .png file and `SpriteFrame
 
 2. Use seperate aseprite files. You can create several different aseprite files with the same `Basename` and different `Animation Name` by using a dot `.` separator. For exmaple, putting `mario.Walk.aseprite` and `mario.Jump.aseprite` in the same folder will let the importer generate a single `SpriteFrames` named `mario.tres` with two animations `Walk` and `Jump`. If there is no `Animation Name` found, then the importer will use `Default` as animation name. (Please avoid using `Default` in `Animation Name` or using `.` in `Basename`, as it may cause conflicts.)
 
-These two patterns can also be used together, in which case the tag name will be appended to the animation name to avoid confusing.
+These two patterns can also be used together, the importer will only use `Tag` if `Tag Only` option is enabled, otherwise the tag name will be appended to the animation name.
 
 If you don't need to reimport anymore, then the aseprite files will become useless. Therefore, feel free to remove the aseprite files and the plugin when exporting.

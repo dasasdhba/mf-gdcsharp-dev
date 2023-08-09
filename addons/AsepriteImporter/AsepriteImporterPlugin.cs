@@ -65,6 +65,11 @@ public partial class AsepriteImporterPlugin : EditorImportPlugin
             },
             new Dictionary()
             {
+                {"name", "tag_only" },
+                {"default_value", true }
+            },
+            new Dictionary()
+            {
                 {"name", "loop" },
                 {"default_value", true }
             },
@@ -163,8 +168,9 @@ public partial class AsepriteImporterPlugin : EditorImportPlugin
             {
                 System.Collections.Generic.Dictionary<string, Variant> opt;
                 bool loop = (bool)options["loop"];
+                bool tagOnly = (bool)options["tag_only"];
 
-                if (FileAccess.FileExists(file + ".import"))
+                if (file != sourceFile && FileAccess.FileExists(file + ".import"))
                 {
                     ConfigFile config = new();
                     config.Load(file + ".import");
@@ -180,6 +186,7 @@ public partial class AsepriteImporterPlugin : EditorImportPlugin
                     };
 
                     loop = (bool)config.GetValue("params", "loop", true);
+                    tagOnly = (bool)config.GetValue("params", "tag_only", true);
                 }
                 else
                 {
@@ -202,7 +209,8 @@ public partial class AsepriteImporterPlugin : EditorImportPlugin
                     outFile["sprite_sheet"],
                     LoadJson(outFile["data_file"]),
                     GetAnimName(file),
-                    loop
+                    loop,
+                    tagOnly
                     ));
 
                 // image has to be importred first
