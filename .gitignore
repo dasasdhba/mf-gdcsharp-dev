@@ -9,3 +9,4 @@ Properties/
 
 # exclude folders
 .exclude/
+temp/
