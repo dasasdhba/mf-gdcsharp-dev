@@ -7,7 +7,7 @@ You can read the documents under the folder `res:\\doc` for more information.
 ## Workflow
 
 This is a Mario Forever project based on `Godot 4 .NET 7`. Current Godot version:
-`v4.1.stable.mono.official [970459615]`. Here are some simple introductionso of the workflow in this project.
+`v4.1.stable.mono.official [970459615]`. Here are some simple introductions of the workflow in this project.
 
 ### Visual Studio 2022
 
