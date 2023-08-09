@@ -64,8 +64,6 @@ public partial class AssetCodeGenerator : EditorPlugin
             GD.Print(Annotation + "Updated.");
             _Changed = false;
             _Skip = true;
-
-            GetEditorInterface().GetResourceFilesystem().Scan();
         }
     }
 
