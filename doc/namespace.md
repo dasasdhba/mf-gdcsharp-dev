@@ -8,6 +8,7 @@ The `namespace` list of this project.
 The Component namepace.
 
 * `Component`: Collection of the base class of components mainly used by Entity.
+* `Component.BT`: Collection of behavior tree components.
 
 The Entity namespace.
 
