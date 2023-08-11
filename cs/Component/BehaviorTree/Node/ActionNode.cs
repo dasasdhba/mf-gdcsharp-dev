@@ -1,4 +1,6 @@
-﻿namespace Component.BT;
+﻿using System;
+
+namespace Component.BT;
 
 /// <summary>
 /// Action node in behavior tree that performs a specific action.
@@ -6,7 +8,6 @@
 /// </summary>
 public partial class ActionNode : BTNode
 {
-    public delegate void Action();
     protected Action ActionMethod;
 
     /// <summary>

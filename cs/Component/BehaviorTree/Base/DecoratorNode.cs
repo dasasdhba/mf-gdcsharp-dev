@@ -11,4 +11,6 @@ public abstract partial class DecoratorNode : BTNode
     /// Construct with a BTNode instance.
     /// </summary>
     public DecoratorNode(BTNode node) => Child = node;
+
+    public override void Reset() => Child.Reset();
 }

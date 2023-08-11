@@ -3,17 +3,20 @@
 namespace Component.BT;
 
 /// <summary>
-/// Process a reference timer.
+/// Alwasy perform an action until a reference timer over.
 /// </summary>
-public partial class TimerRefNode : BTNode
+public partial class TimerRefActionNode : BTNode
 {
+    protected Action ActionMethod;
+
     private double Timer = 0;
     private Func<double> TimeMethod;
 
     /// <summary>
-    /// Construct with a double method returning the time.
+    /// Construct with a double method returning the time and an action method.
     /// </summary>
-    public TimerRefNode(Func<double> timeMethod) => TimeMethod = timeMethod;
+    public TimerRefActionNode(Func<double> timeMethod, Action action) => 
+        (TimeMethod, ActionMethod) = (timeMethod, action);
 
     public override void Reset() => Timer = 0;
 
@@ -26,6 +29,7 @@ public partial class TimerRefNode : BTNode
         }
 
         Timer += delta;
+        ActionMethod?.Invoke();
 
         if (Timer >= TimeMethod.Invoke())
         {

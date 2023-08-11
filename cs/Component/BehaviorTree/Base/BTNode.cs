@@ -19,4 +19,9 @@ public abstract partial class BTNode
     /// Perform behavior and get result state.
     /// </summary>
     public abstract State Perform(double delta);
+
+    /// <summary>
+    /// Reset state.
+    /// </summary>
+    public virtual void Reset() { }
 }

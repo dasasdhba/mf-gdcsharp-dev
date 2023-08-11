@@ -11,4 +11,12 @@ public abstract partial class TaskNode : BTNode
     /// Construct with BTNode instance Array.
     /// </summary>
     public TaskNode(BTNode[] tasks) => Tasks = tasks;
+
+    public override void Reset()
+    {
+        foreach (BTNode task in Tasks)
+        {
+            task.Reset();
+        }
+    }
 }

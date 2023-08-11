@@ -4,14 +4,21 @@
 /// Fallback Task node in behavior tree that performs tasks
 /// until a task is successfully performed.
 /// </summary>
-public partial class FallBackNode : TaskNode
+public partial class FallbackNode : TaskNode
 {
     /// <summary>
     /// Construct with BTNode instance Array.
     /// </summary>
-    public FallBackNode(BTNode[] tasks) : base(tasks) { }
+    public FallbackNode(BTNode[] tasks) : base(tasks) { }
 
     private int Current = 0;
+
+    public override void Reset()
+    {
+        base.Reset();
+
+        Current = 0;
+    }
 
     public override State Perform(double delta)
     {

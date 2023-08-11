@@ -12,6 +12,13 @@ public partial class SequenceNode : TaskNode
 
     private int Current = 0;
 
+    public override void Reset()
+    {
+        base.Reset();
+
+        Current = 0;
+    }
+
     public override State Perform(double delta)
     {
         for(int i=Current;i<Tasks.Length;i++)

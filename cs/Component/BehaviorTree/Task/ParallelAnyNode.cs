@@ -15,6 +15,13 @@ public partial class ParallelAnyNode : TaskNode
 
     private Dictionary<BTNode, bool> QueuedTask = new();
 
+    public override void Reset()
+    {
+        base.Reset();
+
+        QueuedTask.Clear();
+    }
+
     public override State Perform(double delta)
     {
         foreach (BTNode task in Tasks)

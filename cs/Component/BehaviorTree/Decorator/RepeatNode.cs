@@ -20,6 +20,13 @@ public partial class RepeatNode : DecoratorNode
 
     private int Count = 0;
 
+    public override void Reset()
+    {
+        base.Reset();
+
+        Count = 0;
+    }
+
     public override State Perform(double delta)
     {
         State result = Child.Perform(delta);
