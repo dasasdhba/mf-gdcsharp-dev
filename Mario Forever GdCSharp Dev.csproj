@@ -15,7 +15,6 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="addons\AssetCodeGenerator\plugin.cfg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="cs\Asset\Generated\Audio\" />
