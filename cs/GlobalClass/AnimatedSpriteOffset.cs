@@ -5,15 +5,18 @@ namespace GlobalClass;
 
 /// <summary>
 /// AnimatedSprite2D with offset setting.
+/// Please ignore AnimatedSprite's Offset property.
 /// </summary>
 [GlobalClass]
 public partial class AnimatedSpriteOffset :AnimatedSprite2D
 {
-    private Vector2 BaseOffset;
+    [ExportCategory("AnimatedSpriteOffset")]
+
+    [Export]
+    public Vector2 BaseOffset { get; set; } = new Vector2(0, 0);
 
     public AnimatedSpriteOffset() : base()
     {
-        TreeEntered += () => BaseOffset = Offset;
         AnimationChanged += SetOffset;
         FrameChanged += SetOffset;
         SpriteFramesChanged += SetOffset;
