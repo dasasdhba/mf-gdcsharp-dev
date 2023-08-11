@@ -10,11 +10,10 @@ namespace GlobalClass;
 [GlobalClass]
 public partial class SpeedAccParam : SpeedParam
 {
-    [ExportCategory("SpeedAccParameter")]
-
     /// <summary>
     /// The direction to accelerate.
     /// </summary>
+    [ExportCategory("SpeedAccParameter")]
     [Export]
     public int AccDirection
     {

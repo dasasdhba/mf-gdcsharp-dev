@@ -9,12 +9,11 @@ namespace GlobalClass;
 [GlobalClass]
 public partial class SpriteFramesOffset : SpriteFrames
 {
-    [ExportCategory("SpriteFramesOffset")]
-
     /// <summary>
     /// Key: Animation name
     /// Item: SpriteFramesOffsetParam[]
     /// </summary>
+    [ExportCategory("SpriteFramesOffset")]
     [Export]
     public Dictionary<string, SpriteFramesOffsetParam[]> Offsets { get; set; }
 }
