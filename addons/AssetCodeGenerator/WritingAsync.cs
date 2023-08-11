@@ -1,14 +1,13 @@
 ﻿#if TOOLS
 
 using Godot;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace Editor.Addon;
 
 public partial class AssetCodeGenerator : EditorPlugin
 {
     // texture thread
-    private Thread TextureThread = null;
     private static readonly WritingThreadParam TextureParam = new(
         "Asset.Texture",
         "Texture2DHolder",
@@ -19,7 +18,6 @@ public partial class AssetCodeGenerator : EditorPlugin
         );
 
     // sprite frames thread
-    private Thread SpriteFramesThread = null;
     private static readonly WritingThreadParam SpriteFramesParam = new(
         "Asset.Sprite",
         "SpriteFramesHolder",
@@ -30,7 +28,6 @@ public partial class AssetCodeGenerator : EditorPlugin
         );
 
     // audio stream thread
-    private Thread AudioStreamThread = null;
     private static readonly WritingThreadParam AudioStreamParam = new(
         "Asset.Audio",
         "AudioStreamHolder",
@@ -61,36 +58,40 @@ public partial class AssetCodeGenerator : EditorPlugin
         }
     }
 
-    private static void WritingThreadMethod(WritingThreadParam param)
+    private static async Task WritingAsync(WritingThreadParam param)
     {
-        foreach (string respath in GetAllFilePath(param.ResPath, param.Filter))
+        await Task.Run(() =>
         {
-            string classname = FilePathToPascal(respath);
-            string cspath = param.CsPath + "/" + classname + ".cs";
-
-            if (FileAccess.FileExists(cspath))
+            foreach (string respath in GetAllFilePath(param.ResPath, param.Filter))
             {
-                string fileStr = FileAccess.GetFileAsString(cspath);
-                if (fileStr.Contains(param.Property + " = \"" + respath + "\";")) { continue; }
+                string classname = FilePathToPascal(respath);
+                string cspath = param.CsPath + "/" + classname + ".cs";
+
+                if (FileAccess.FileExists(cspath))
+                {
+                    string fileStr = FileAccess.GetFileAsString(cspath);
+                    if (fileStr.Contains(param.Property + " = \"" + respath + "\";")) { continue; }
+                }
+
+                FileAccess file = FileAccess.Open(cspath, FileAccess.ModeFlags.Write);
+                file.StoreString(
+                    Comment + "\n" +
+                    "\n" +
+                    "namespace " + param.NameSpace + ";\n" +
+                    "\n" +
+                    "public partial class " + classname + " : " + param.Classname + "\n" +
+                    "{\n" +
+                    "    public " + classname + "() => " + param.Property + " = \"" + respath + "\";\n" +
+                    "}\n"
+                    );
+                file.Close();
+                _Changed = true;
+
+                GD.PrintRich("[color=green]" + Annotation + param.Classname + " [b]" + classname + "[/b] updated.[/color]");
+
             }
-
-            FileAccess file = FileAccess.Open(cspath, FileAccess.ModeFlags.Write);
-            file.StoreString(
-                Comment + "\n" +
-                "\n" +
-                "namespace " + param.NameSpace + ";\n" +
-                "\n" +
-                "public partial class " + classname + " : " + param.Classname + "\n" +
-                "{\n" +
-                "    public " + classname + "() => " + param.Property + " = \"" + respath + "\";\n" +
-                "}\n"
-                );
-            file.Close();
-            _Changed = true;
-
-            GD.PrintRich("[color=green]" + Annotation + param.Classname +" [b]" + classname + "[/b] updated.[/color]");
-
-        }
+        });
+        
     }
 }
 
