@@ -32,7 +32,7 @@ public partial class PlayerPlatformerBody : PlatformerBody2D
             {
                 _JumpHeightIdle = value;
                 JumpAccFixIdle = GravityParam.Acceleration -
-                    ((GravityParam.Acceleration * JumpHeightMin) / value);
+                    (GravityParam.Acceleration * JumpHeightMin / value);
             }
         }
     }
@@ -48,7 +48,7 @@ public partial class PlayerPlatformerBody : PlatformerBody2D
             {
                 _JumpHeightMove = value;
                 JumpAccFixMove = GravityParam.Acceleration -
-                    ((GravityParam.Acceleration * JumpHeightMin) / value);
+                    (GravityParam.Acceleration * JumpHeightMin / value);
             }
         }
     }
@@ -64,7 +64,7 @@ public partial class PlayerPlatformerBody : PlatformerBody2D
             {
                 _JumpHeightLui = value;
                 JumpAccFixLui = GravityParam.Acceleration -
-                    ((GravityParam.Acceleration * JumpHeightMin) / value);
+                    (GravityParam.Acceleration * JumpHeightMin / value);
             }
         }
     }
@@ -94,8 +94,8 @@ public partial class PlayerPlatformerBody : PlatformerBody2D
     public void JumpSpeedInit()
     {
         JumpSpeed = (float)Math.Sqrt(2f * GravityParam.Acceleration * JumpHeightMin);
-        Func<float, float> accFix = new((float height) => GravityParam.Acceleration -
-                    ((GravityParam.Acceleration * JumpHeightMin) / height));
+        float accFix(float height) => GravityParam.Acceleration -
+                    (GravityParam.Acceleration * JumpHeightMin / height);
         JumpAccFixIdle = accFix(JumpHeightIdle);
         JumpAccFixMove = accFix(JumpHeightMove);
         JumpAccFixLui = accFix(JumpHeightLui);
