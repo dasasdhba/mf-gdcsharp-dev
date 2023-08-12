@@ -31,6 +31,7 @@ public partial class AssetCodeGenerator : EditorPlugin
             WritingAsync(TextureParam),
             WritingAsync(SpriteFramesParam),
             WritingAsync(AudioStreamParam),
+            WritingAsync(PackedSceneParam)
         };
 
         foreach (Task task in tasks)

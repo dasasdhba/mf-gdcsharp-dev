@@ -37,6 +37,16 @@ public partial class AssetCodeGenerator : EditorPlugin
         new string[] { "wav", "mp3", "ogg" }
         );
 
+    // packed sceen thread
+    private static readonly WritingThreadParam PackedSceneParam = new(
+        "Asset.Scene",
+        "PackedSceneHolder",
+        "PackedScenePath",
+        "res://cs/Asset/Generated/PackedScene",
+        "res://assets/scene",
+        new string[] { "tscn" }
+        );
+
     // writing thread template
     private struct WritingThreadParam
     {

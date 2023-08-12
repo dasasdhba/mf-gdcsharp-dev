@@ -28,6 +28,7 @@ The Asset namespace managed automatically by Godot editor tool.
 * `Asset.Texture`: Automatically generated Texture2DHolder by Godot editor tool.
 * `Asset.Sprite`: Automatically generated SpriteFramesHolder by Godot editor tool.
 * `Asset.Audio`: Automatically generated AudioStreamHolder by Godot editor tool.
+* `Asset.Scene`: Automatically generated PackedScene components by Godot editor tool.
 
 The Editor Tool.
 
