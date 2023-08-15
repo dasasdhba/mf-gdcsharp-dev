@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System;
+using Godot;
 using Entity;
 using Utils;
 
@@ -24,12 +25,39 @@ public abstract partial class Spawner2D : Node2D
     [Export]
     public bool ManualOnly { get; set; } = false;
 
-    private bool Spawned = false;
+    /// <summary>
+    /// Process callback mode.
+    /// </summary>
+    public enum SpawnerProcessCallback
+    {
+        Idle,
+        Physics
+    }
+
+    /// <summary>
+    /// Spawner Process callback mode.
+    /// </summary>
+    [Export]
+    public SpawnerProcessCallback ProcessCallback { get; set; } =
+        SpawnerProcessCallback.Idle;
+
+    /// <summary>
+    /// Emitted when spawns the entity.
+    /// </summary>
+    public Action<Entity2D> Spawned;
+
+    protected virtual void OnSpawned(Entity2D entity) => Spawned?.Invoke(entity);
 
     /// <summary>
     /// Spawn function need to override to implement.
     /// </summary>
-    public abstract Entity2D Spawn();
+    protected abstract Entity2D Spawn();
+
+    /// <summary>
+    /// Init the spawned entity after <c>Entity2D.Init()</c> has been called.
+    /// </summary>
+    /// <param name="entity"></param>
+    protected virtual void EntityInit(Entity2D entity) { }
 
     /// <summary>
     /// Bind spawner to the entity.
@@ -44,22 +72,26 @@ public abstract partial class Spawner2D : Node2D
         Entity2D result = Spawn();
         BindEntity(result);
         result.Init(GetParent());
+        EntityInit(result);
+        OnSpawned(result);
         return result;
     }
+
+    private bool _Spawned = false;
 
     /// <summary>
     /// Reset spawner.
     /// </summary>
-    public void ResetSpawner() { Spawned = false; }
+    public void Reset() { _Spawned = false; }
 
     private void SpawnProcess()
     {
-        if (ManualOnly || Spawned) { return; }
+        if (ManualOnly || _Spawned) { return; }
 
         if (SpawnInScreen && !View.IsInView(this, InScreenEps)) { return; }
 
         Respawn();
-        Spawned = true;
+        _Spawned = true;
         if (SpawnOnce) { QueueFree(); }
     }
 
@@ -74,6 +106,15 @@ public abstract partial class Spawner2D : Node2D
     {
         base._PhysicsProcess(delta);
 
-        SpawnProcess();
+        if (ProcessCallback == SpawnerProcessCallback.Physics)
+            SpawnProcess();
+    }
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+        if (ProcessCallback == SpawnerProcessCallback.Idle)
+            SpawnProcess();
     }
 }

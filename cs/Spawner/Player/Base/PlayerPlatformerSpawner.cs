@@ -4,13 +4,13 @@ using Entity.Player;
 namespace Spawner.Player;
 
 /// <summary>
-/// // Spawner spawns PlayerPlatformer
+/// Spawner spawns PlayerPlatformer.
 /// </summary>
 /// <typeparam name="T">PlayerPlatformer</typeparam>
 public partial class PlayerPlatformerSpawner<T> : Spawner2D where T :PlayerPlatformer, new()
 {
 
-    public override Entity2D Spawn()
+    protected override Entity2D Spawn()
     {
         return new T() { Transform = Transform };
     }
