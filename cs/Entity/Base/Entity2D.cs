@@ -81,7 +81,7 @@ public abstract partial class Entity2D
     /// The root node in the SceneTree of the entity.
     /// This should be set up by <c>Bind(root, true)</c>.
     /// </summary>
-    public Node Root { get; set; }
+    public Node Root { get; private set; }
 
     /// <summary>
     /// Ensure getting the right container.

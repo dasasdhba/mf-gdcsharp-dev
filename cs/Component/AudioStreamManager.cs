@@ -17,13 +17,17 @@ public partial class AudioStreamManager
     public bool Enable2D { get; set; } = false;
 
     // default Bus
-    private string Bus = "Sound";
+    protected string Bus = "Sound";
+
+    // change bus
+    public void ChangeBusToSound() => Bus = "Sound";
+    public void ChangeBusToMusic() => Bus = "Music";
 
     // root node
     private Node Root;
 
     // buffered audio stream
-    private Dictionary<string, AudioStream> BufferedStreams = new();
+    protected Dictionary<string, AudioStream> BufferedStreams = new();
 
     /// <summary>
     /// Construct with root node.
@@ -69,9 +73,14 @@ public partial class AudioStreamManager
     }
 
     /// <summary>
+    /// Clear buffered streams.
+    /// </summary>
+    public void ClearCache() => BufferedStreams.Clear();
+
+    /// <summary>
     /// Node for holding AudioStreamPlayer.
     /// </summary>
-    public partial class PlayerManager : Node
+    protected partial class PlayerManager : Node
     {
         /// <summary>
         /// destroy if no child player
@@ -89,7 +98,7 @@ public partial class AudioStreamManager
     /// <summary>
     /// Node2D for holding Player2D.
     /// </summary>
-    public partial class PlayerManager2D : Node2D
+    protected partial class PlayerManager2D : Node2D
     {
         /// <summary>
         /// destroy if no child player
@@ -104,13 +113,9 @@ public partial class AudioStreamManager
         }
     }
 
-    // change bus
-    public void ChangeBusToSound() => Bus = "Sound";
-    public void ChangeBusToMusic() => Bus = "Music";
-
     // set player manager
     private PlayerManager _PlayerManager;
-    public PlayerManager GetPlayerManager()
+    protected PlayerManager GetPlayerManager()
     {
         if (_PlayerManager != null) { return _PlayerManager; }
 
@@ -120,7 +125,7 @@ public partial class AudioStreamManager
     }
 
     private PlayerManager2D _PlayerManager2D;
-    public PlayerManager2D GetPlayerManager2D()
+    protected PlayerManager2D GetPlayerManager2D()
     {
         if (_PlayerManager2D != null) { return _PlayerManager2D; }
 
