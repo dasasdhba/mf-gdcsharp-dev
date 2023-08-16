@@ -34,9 +34,9 @@ public partial class PlayerPlatformer : Player
 				}
 			);
 
-		RootNode.PlayerJump += () => Audio?.Play<PlayerJump>();
-		RootNode.PlayerSwim += () => Audio?.Play<PlayerSwim>();
-        RootNode.PlayerJumpOutWater += () => Audio?.Play<PlayerSwim>();
+		RootNode.PlayerJump += () => Audio.Play<PlayerJump>();
+		RootNode.PlayerSwim += () => Audio.Play<PlayerSwim>();
+        RootNode.PlayerJumpOutWater += () => Audio.Play<PlayerSwim>();
     }
 
     protected override void EntityFree()
