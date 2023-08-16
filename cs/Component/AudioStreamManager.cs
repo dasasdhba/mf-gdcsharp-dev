@@ -172,7 +172,7 @@ public partial class AudioStreamManager
     /// </summary>
     /// <typeparam name="T">The AudioStreamHolder to load.</typeparam>
     /// <returns>The AudioStream.</returns>
-    public AudioStream GetAudioStream<T>() where T :AudioStreamHolder, new()
+    protected AudioStream GetAudioStream<T>() where T :AudioStreamHolder, new()
     {
         // use buffer first
         AudioStreamHolder holder = new T();
@@ -200,6 +200,8 @@ public partial class AudioStreamManager
     /// <returns>The generated AudioStreamPlayer</returns>
     public AudioStreamPlayer PlayStream<T>(bool stopAfterFree = false) where T : AudioStreamHolder, new()
     {
+        if (_Free) { return null; }
+
         AudioStream stream = GetAudioStream<T>();
 
         AudioStreamPlayer player = GetAudioStreamPlayer(stream, stopAfterFree);
@@ -216,6 +218,8 @@ public partial class AudioStreamManager
     /// <returns>The generated AudioStreamPlayer2D</returns>
     public AudioStreamPlayer2D PlayStream2D<T>(bool stopAfterFree = false) where T : AudioStreamHolder, new()
     {
+        if (_Free) { return null; }
+
         AudioStream stream = GetAudioStream<T>();
 
         AudioStreamPlayer2D player = GetAudioStreamPlayer2D(stream, stopAfterFree);
