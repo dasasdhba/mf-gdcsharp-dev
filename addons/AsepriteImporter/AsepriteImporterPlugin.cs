@@ -3,7 +3,6 @@
 using Godot;
 using Godot.Collections;
 using System;
-using System.Threading;
 using System.Collections;
 
 namespace Editor.Addon;
@@ -16,11 +15,7 @@ namespace Editor.Addon;
 [Tool]
 public partial class AsepriteImporterPlugin : EditorImportPlugin
 {
-    private AsepriteCommand Command;
-    private EditorFileSystem ResourceFilesystem;
-
-    public AsepriteImporterPlugin(AsepriteCommand command, EditorFileSystem resSystem) =>
-        (Command, ResourceFilesystem) = (command, resSystem);
+    public AsepriteImporterPlugin() : base() { }
 
     // override implement
     public override string _GetImporterName()
@@ -127,6 +122,12 @@ public partial class AsepriteImporterPlugin : EditorImportPlugin
 
     private Error GenerateImportFiles(string sourceFile, Dictionary options)
     {
+        AsepriteCommand Command = AsepriteImporter.Command;
+        EditorFileSystem ResourceFilesystem = AsepriteImporter.ResourceFilesystem;
+
+        if (Command == null || ResourceFilesystem == null)
+            return Error.Failed;
+
         System.Collections.Generic.Dictionary<string, Variant> aseOpt = new()
         {
             {"exception_pattern", options["exclude_layers_pattern"] },

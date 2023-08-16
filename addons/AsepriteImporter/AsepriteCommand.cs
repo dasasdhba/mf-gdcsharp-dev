@@ -4,8 +4,6 @@ using System;
 using Godot;
 using System.Collections.Generic;
 using System.Linq;
-using System.IO;
-using System.Security.Cryptography;
 
 namespace Editor.Addon;
 
@@ -15,8 +13,6 @@ namespace Editor.Addon;
 [Tool]
 public partial class AsepriteCommand
 {
-    private static readonly string CachedPath = "res://.godot/.aseprite_cache";
-
     private AsepriteConfig Config;
 
     public AsepriteCommand(AsepriteConfig config) => Config = config;
@@ -64,18 +60,6 @@ public partial class AsepriteCommand
         string outputFile = outputDir + "/" + outputName;
         string dataFile = outputFile + ".json";
         string spriteSheet = outputFile + ".png";
-
-        string dataFileCommand = IsCached(resData, resData) ? "" : dataFile;
-        string spriteSheetCommand = IsCached(resSprite, resSprite) ? "" : spriteSheet;
-
-        Dictionary<string, string> result = new()
-        {
-            {"data_file", resData },
-            {"sprite_sheet", resSprite }
-        };
-        
-        if (dataFileCommand == "" && spriteSheetCommand == "")
-            return result;
         
         string sourceName = ProjectSettings.GlobalizePath(fileName);
         Godot.Collections.Array<string> arguments = 
@@ -95,53 +79,11 @@ public partial class AsepriteCommand
             return new Dictionary<string, string>();
         }
 
-        SetCache(result);
-
-        return result;
-    }
-
-    private static void SetCache(Dictionary<string, string> cache)
-    {
-        ConfigFile cfg = new();
-        if (Godot.FileAccess.FileExists(CachedPath))
-            cfg.Load(CachedPath);
-
-        string data = GetFileHash(cache["data_file"]);
-        string spr = GetFileHash(cache["sprite_sheet"]);
-
-        cfg.SetValue("aseprite_importer", cache["data_file"], data);
-        cfg.SetValue("aseprite_importer", cache["sprite_sheet"], spr);
-
-        cfg.Save(CachedPath);
-    }
-
-    private static bool IsCached(string filepath, string item)
-    {
-        ConfigFile cfg = new();
-        if (Godot.FileAccess.FileExists(CachedPath))
-            cfg.Load(CachedPath);
-        else
-            return false;
-
-        string hash = GetFileHash(filepath);
-        return (string)cfg.GetValue("aseprite_importer", item, "Error") == hash;
-    }
-
-    private static string GetFileHash(string filepath)
-    {
-        if (!Godot.FileAccess.FileExists(filepath))
-            return "";
-
-        string globalPath = ProjectSettings.GlobalizePath(filepath);
-        FileStream stream = new(globalPath, FileMode.Open);
-
-        SHA256 Sha256 = SHA256.Create();
-        byte[] by = Sha256.ComputeHash(stream);
-        Sha256.Clear();
-
-        stream.Close();
-
-        return BitConverter.ToString(by).Replace("-", "").ToLower();
+        return new Dictionary<string, string>()
+        {
+            {"data_file", resData },
+            {"sprite_sheet", resSprite }
+        };
     }
 
     private int Execute(string[] arguments, Godot.Collections.Array output)
