@@ -11,6 +11,7 @@ Currently, this plugin will detect the change of project filesystem and package 
 * `res:\\assets\audio` AudioStream
 * `res:\\assets\texture` Texture2D
 * `res:\\assets\sprite` SpriteFrames
+* `res:\\assets\scene` PackedScene
 
 There may be more resource types maintained by this plugin in the future.
 

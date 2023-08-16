@@ -10,7 +10,7 @@ The followings are also some simple introductions of the patterns used in this p
 
 ## Entity-Component-Spawner pattern
 
-This pattern is invented and named by myself, which may sound like traditional entity-component-system, but they are not exactly the same. A func fact is that they have the same abbr ECS.
+This pattern is invented and named by myself, which may sound like traditional entity-component-system, but they are not exactly the same. A fun fact is that they have the same abbr ECS.
 
 ### Entity
 
