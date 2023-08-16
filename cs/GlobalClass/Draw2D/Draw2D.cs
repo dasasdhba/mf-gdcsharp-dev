@@ -128,21 +128,24 @@ public partial class Draw2D : Node2D
     /// reset the blend mode, material modulate, transform, etc.
     /// Override to implement.
     /// </summary>
-    public virtual void DrawProcess(double delta)
+    /// <returns>true to update draw, false to keep last draw.</returns>
+    public virtual bool DrawProcess(double delta)
     {
         QueuedDrawingTasks.Clear();
         ResetBlendMode();
         ResetMaterial();
         ResetModulate();
         ResetTransform();
+
+        return true;
     }
 
     private void ProcessDrawing(double delta)
     {
         if (!Visible) { return; }
 
-        DrawProcess(delta);
-        Redraw();
+        if (DrawProcess(delta))
+            Redraw();
     }
 
     public override void _Process(double delta)
