@@ -3,9 +3,9 @@
 namespace Utils;
 
 /// <summary>
-/// Useful functions for node operation.
+/// Useful functions for children operation.
 /// </summary>
-public static partial class UNode
+public static partial class UChildren
 {
     /// <summary>
     /// Copy children nodes as target node's children.
@@ -18,6 +18,17 @@ public static partial class UNode
         {
             Node duplicate = node.Duplicate((int)Node.DuplicateFlags.Scripts);
             target.AddChild(duplicate);
+        }
+    }
+
+    /// <summary>
+    /// Reparent children nodes as target node's children.
+    /// </summary>
+    public static void Reparent(Node source, Node target)
+    {
+        foreach (Node node in source.GetChildren())
+        {
+            node.Reparent(target);
         }
     }
 }
