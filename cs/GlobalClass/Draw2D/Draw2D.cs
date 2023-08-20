@@ -68,7 +68,10 @@ public partial class Draw2D : Node2D
     private List<Action<Drawer>> QueuedDrawingTasks = new();
     private List<Drawer> QueuedDrawers = new();
 
-    protected void ClearDrawingTasks() => QueuedDrawingTasks.Clear();
+    /// <summary>
+    /// Clear all the queued drawing tasks.
+    /// </summary>
+    protected void ClearQueuedDraw() => QueuedDrawingTasks.Clear();
 
     /// <summary>
     /// Managed by Draw2D, deal with specific drawing task.
@@ -133,7 +136,7 @@ public partial class Draw2D : Node2D
     /// <returns>true to update draw, false to keep last draw.</returns>
     public virtual bool DrawProcess(double delta)
     {
-        ClearDrawingTasks();
+        ClearQueuedDraw();
         ResetBlendMode();
         ResetMaterial();
         ResetModulate();
@@ -144,7 +147,7 @@ public partial class Draw2D : Node2D
 
     private void ProcessDrawing(double delta)
     {
-        if (!Visible) { return; }
+        if (VisibleOnly && !Visible) { return; }
 
         if (DrawProcess(delta))
             Redraw();
