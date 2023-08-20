@@ -5,7 +5,7 @@ namespace Utils;
 /// <summary>
 /// Useful functions for children operation.
 /// </summary>
-public static partial class UChildren
+public static partial class Children
 {
     /// <summary>
     /// Copy children nodes as target node's children.
