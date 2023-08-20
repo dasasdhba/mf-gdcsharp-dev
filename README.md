@@ -33,4 +33,6 @@ The importer will auto generate `CompressedTexture2D` .png file and `SpriteFrame
 
 These two patterns can also be used together, the importer will only use `Tag` if `Tag Only` option is enabled, otherwise the tag name will be appended to the animation name.
 
+The animation will be imported as looped by default import settings, if you want to make a specific `Tag` oneshot, you can add `_oneshot` suffix to the tag name.
+
 If you don't need to reimport anymore, then the aseprite files will become useless. Therefore, feel free to remove the aseprite files and the plugin when exporting.

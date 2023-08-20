@@ -86,6 +86,11 @@ public partial class AsepriteFrames
     private static void AddFramesToAnimation(SpriteFrames spr, FramesInfo info,
         string animName, Dictionary[] frames, string direction = "forward")
     {
+        // oneshot support
+        bool oneshot = animName.EndsWith("_oneshot");
+        if (oneshot)
+            animName = animName[..^8];
+
         if (spr.HasAnimation(animName)) { return; }
 
         spr.AddAnimation(animName);
@@ -93,7 +98,8 @@ public partial class AsepriteFrames
         float minDuration = GetMinDuration(frames);
         float fps = GetFps(minDuration);
 
-        spr.SetAnimationLoop(animName, info.Loop);
+        bool loop = !oneshot && info.Loop;
+        spr.SetAnimationLoop(animName, loop);
         spr.SetAnimationSpeed(animName, fps);
 
         bool reversed = direction == "reverse" || direction == "pingpong_reverse";
