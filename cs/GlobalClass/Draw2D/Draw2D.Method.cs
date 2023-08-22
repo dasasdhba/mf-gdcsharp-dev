@@ -397,7 +397,7 @@ public partial class Draw2D : Node2D
 
     protected void QueuedDrawAnimatedSprite(AnimatedSprite2D spr, Vector2 pos, Color? modulate = null)
     {
-        pos += (spr is AnimatedSpriteOffset sprOffset)? sprOffset.BaseOffset : spr.Offset;
+        pos += (spr is AnimatedSpriteOffset2D sprOffset)? sprOffset.BaseOffset : spr.Offset;
         QueuedDrawSpriteFrames(spr.SpriteFrames, spr.Animation, spr.Frame, pos, modulate);
     }
 
