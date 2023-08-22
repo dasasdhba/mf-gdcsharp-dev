@@ -1,13 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://chkkj46ws8w1t"]
+[gd_scene load_steps=7 format=3 uid="uid://chkkj46ws8w1t"]
 
 [ext_resource type="Script" path="res://cs/Spawner/Player/MarioSpawner.cs" id="1_nt54k"]
 [ext_resource type="Texture2D" uid="uid://cx7ynmhg3oqhm" path="res://main/icon.svg" id="2_f02qr"]
+[ext_resource type="Script" path="res://cs/Entity/Fluid/Base/AreaWater.cs" id="3_tbojv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0pde"]
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ppnx"]
 size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plbl7"]
+size = Vector2(130, 130)
 
 [node name="Main" type="Node"]
 
@@ -69,3 +73,10 @@ shape = SubResource("RectangleShape2D_3ppnx")
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D5"]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_f02qr")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("3_tbojv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(128, 112)
+shape = SubResource("RectangleShape2D_plbl7")
