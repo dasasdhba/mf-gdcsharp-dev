@@ -41,7 +41,7 @@ public partial class PlatformerBody2D : CharacterBody2D
     public PlatformerBody2D() : base()
     {
         GravityParam ??= new();
-        GravityParamWater ??= new(100f, 2000f, 150f);
+        GravityParamWater ??= new(250f, 2125f, 150f);
         WalkParam ??= new();
 
         WaterDetector = new() { SyncObject = this };
