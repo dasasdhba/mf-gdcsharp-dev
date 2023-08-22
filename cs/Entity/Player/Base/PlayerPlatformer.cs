@@ -47,6 +47,8 @@ public partial class PlayerPlatformer : Player
 
     protected override void SetComponents()
 	{
+		AccessGlobalData();
+
 		// root node
 		RootNode = new PlayerPlatformerBody()
         {
@@ -65,10 +67,16 @@ public partial class PlayerPlatformer : Player
 
 		// water jump shape
 		WaterJumpDetector.AddShape(PlayerShape.OverlappingWaterJump);
+        WaterJumpDetector.QueryParameters.CollideWithAreas = true;
+        WaterJumpDetector.QueryParameters.CollideWithBodies = false;
 
-		// event subscribe
-		RootNode.TreeEntered += () => WaterJumpDetector.SetSpace(RootNode);
-		RootNode.ChangeShape += PlayerShape.OnChangeShape;
+        // event subscribe
+        RootNode.TreeEntered += () =>
+		{
+            WaterJumpDetector.SetSpace(RootNode);
+            WaterJumpDetector.QueryParameters.CollisionMask = RootNode.CollisionMask;
+        };
+        RootNode.ChangeShape += PlayerShape.OnChangeShape;
 	}
 
     protected override void EnterTree(Node parent)
