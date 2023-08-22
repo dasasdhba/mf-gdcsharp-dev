@@ -1,24 +1,32 @@
 ﻿using Godot;
+using Component;
+using Asset.Scene;
 
 namespace Entity.Player;
 
 /// <summary>
 /// Player Mario
 /// </summary>
-public partial class PlayerPlatformerMario : PlayerPlatformer
+public partial class PlayerPlatformerMario : PlayerPlatformer, ISprite2D
 {
+    public Node2D Sprite { get; set; }
 
-    public PlayerPlatformerMario()
+    public PlayerPlatformerMario() : base()
     {
         GlobalData.PlayerName = "Mario";
     }
 
-    // debug sprite
+    protected override void SetComponents()
+    {
+        base.SetComponents();
+
+        Sprite = new PlayerAnimationPlatformer(RootNode, new MarioAnimation());
+    }
+
     protected override void EnterTree(Node parent)
     {
         base.EnterTree(parent);
 
-        Sprite2D spr = new() { Texture = (Texture2D)GD.Load("res://main/icon.svg") };
-        Root.CallDeferred("add_child", spr);
+        RootNode.CallDeferred("add_child", Sprite);
     }
 }

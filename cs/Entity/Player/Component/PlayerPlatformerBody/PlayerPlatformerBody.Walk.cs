@@ -14,13 +14,13 @@ public partial class PlayerPlatformerBody : PlatformerBody2D
 
     // walk parameter can not be accessed by external class directly for safety reason
     // consider using Set/GetMFWalkParam() instead
-    protected float MFInitSpeed { get; set; } = 400f;
-    protected AccelerationParam MFWalkParam { get; set; } = new AccelerationParam(2500f, 0f, 1750f);
-    protected AccelerationParam MFRunParam { get; set; } = new AccelerationParam(2500f, 2500f, 3000f);
-    protected AccelerationParam MFTurnParam { get; set; } = new AccelerationParam(0f, 7500f, 0f);
-    protected AccelerationParam MFStopParam { get; set; } = new AccelerationParam(0f, 2500f, 0f);
-    protected AccelerationParam MFRunStopParam { get; set; } = new AccelerationParam(0f, 2500f, 1750f);
-    protected AccelerationParam MFCrouchParam { get; set; } = new AccelerationParam(0f, 2500f, 0f);
+    public float MFInitSpeed { get; protected set; } = 400f;
+    public AccelerationParam MFWalkParam { get; protected set; } = new AccelerationParam(2500f, 0f, 1750f);
+    public AccelerationParam MFRunParam { get; protected set; } = new AccelerationParam(2500f, 2500f, 3000f);
+    public AccelerationParam MFTurnParam { get; protected set; } = new AccelerationParam(0f, 7500f, 0f);
+    public AccelerationParam MFStopParam { get; protected set; } = new AccelerationParam(0f, 2500f, 0f);
+    public AccelerationParam MFRunStopParam { get; protected set; } = new AccelerationParam(0f, 2500f, 1750f);
+    public AccelerationParam MFCrouchParam { get; protected set; } = new AccelerationParam(0f, 2500f, 0f);
 
     /// <summary>
     /// Help structure for getting/setting walk parameter.
