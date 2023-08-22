@@ -26,11 +26,4 @@ public abstract partial class Player : Entity2D
         PlayerState.AddPlayer(this);
     }
 
-    protected override void EntityInit()
-    {
-        base.EntityInit();
-
-        AccessGlobalData();
-    }
-
 }
