@@ -156,7 +156,7 @@ public partial class AsepriteImporterPlugin : EditorImportPlugin
 
             if (AsepriteConfig.GetRemoveJson())
             {
-                DirAccess.RemoveAbsolute(ProjectSettings.GlobalizePath(outFile["data_file"]));
+                DirAccess.RemoveAbsolute(outFile["data_file"]);
             }
         }
         // spriteframes pattern
@@ -220,7 +220,7 @@ public partial class AsepriteImporterPlugin : EditorImportPlugin
 
                 if (AsepriteConfig.GetRemoveJson())
                 {
-                    DirAccess.RemoveAbsolute(ProjectSettings.GlobalizePath(outFile["data_file"]));
+                    DirAccess.RemoveAbsolute(outFile["data_file"]);
                 }
             }
 
