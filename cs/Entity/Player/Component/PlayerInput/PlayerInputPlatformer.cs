@@ -12,10 +12,10 @@ public partial class PlayerInputPlatformer : PlayerInput
     /// </summary>
     public struct DirInputMap
     {
-        public ActionState Up = new();
-        public ActionState Down = new();
-        public ActionState Left = new();
-        public ActionState Right = new();
+        public ActionState Up { get; set; } = new();
+        public ActionState Down { get; set; } = new();
+        public ActionState Left { get; set; } = new();
+        public ActionState Right { get; set; } = new();
 
         public DirInputMap() { }
     }
