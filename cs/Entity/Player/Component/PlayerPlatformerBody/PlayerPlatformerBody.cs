@@ -1,5 +1,6 @@
 ﻿using Component;
 using GlobalClass;
+using Utils;
 using System.Collections.Generic;
 
 namespace Entity.Player;
@@ -10,11 +11,24 @@ namespace Entity.Player;
 /// </summary>
 public partial class PlayerPlatformerBody : PlatformerBody2D
 {
+    // components
+    public PlayerData GlobalData
+    {
+        get
+        {
+            if (BufferedData != null)
+                return BufferedData;
 
-    // dependency components
-    public PlayerData GlobalData { get; set; }
-    public PlayerInputPlatformer InputHandle { get; set; } = new PlayerInputPlatformerNull();
-    public OverlapObject2D WaterJumpDetector { get; set; }
+            BufferedData = (Meta.GetEntity(this) as PlayerPlatformer)?.GlobalData;
+            return BufferedData;
+        }
+        private set { }
+    }
+
+    private PlayerData BufferedData;
+
+    public PlayerInputPlatformer InputHandle { get; set; } = new();
+    public OverlapObject2D WaterJumpDetector { get; set; } = new();
 
     /// <summary>
     /// Direction input map with <c>UpDirection</c>.
@@ -26,7 +40,17 @@ public partial class PlayerPlatformerBody : PlatformerBody2D
     /// </summary>
     public Dictionary<string, PlayerInput.ActionState> Actions { get; set; }
 
-    public PlayerPlatformerBody() :base() { }
+    public PlayerPlatformerBody() :base() 
+    {
+        WaterJumpDetector.QueryParameters.CollideWithAreas = true;
+        WaterJumpDetector.QueryParameters.CollideWithBodies = false;
+
+        TreeEntered += () =>
+        {
+            WaterJumpDetector.SetSpace(this);
+            WaterJumpDetector.QueryParameters.CollisionMask = CollisionMask;
+        };
+    }
 
     public override void _PhysicsProcess(double delta)
     {

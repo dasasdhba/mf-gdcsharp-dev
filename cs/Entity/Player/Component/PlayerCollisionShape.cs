@@ -49,11 +49,12 @@ public partial class PlayerCollisionShape
     /// Should be called in <c>PlayerPlatformer.EnterTree(parent)</c>
     /// with the parent RootNode.
     /// </summary>
-    public void EnterTree(Node parent)
+    public void EnterTree(PlayerPlatformerBody parent)
     {
         parent.CallDeferred("add_child", CollisionSmall);
         parent.CallDeferred("add_child", CollisionSuper);
         parent.CallDeferred("add_child", OverlappingWaterJump);
+        parent.WaterJumpDetector.AddShape(OverlappingWaterJump);
     }
     
 }

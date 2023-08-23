@@ -13,9 +13,7 @@ public partial class PlayerPlatformer : Player
 {
 	// Components
 	public PlayerPlatformerBody RootNode { get; set; }
-	public PlayerInputPlatformer InputHandle { get; set; } = new();
 	public PlayerCollisionShape PlayerShape { get; set; } = new();
-	public OverlapObject2D WaterJumpDetector { get; set; } = new();
 
     // audio
     public AudioStreamManager Audio { get; set; }
@@ -54,28 +52,13 @@ public partial class PlayerPlatformer : Player
         {
 			Transform = Transform,
 			GravityParam = new AccelerationParam(2500f, 2500f, 500f),
-
-            // dependency components
-            GlobalData = GlobalData,
-            InputHandle = InputHandle,
-			WaterJumpDetector = WaterJumpDetector
 		};
 		Bind(RootNode, true);
 
 		// set up audio
 		AudioInit();
 
-		// water jump shape
-		WaterJumpDetector.AddShape(PlayerShape.OverlappingWaterJump);
-        WaterJumpDetector.QueryParameters.CollideWithAreas = true;
-        WaterJumpDetector.QueryParameters.CollideWithBodies = false;
-
         // event subscribe
-        RootNode.TreeEntered += () =>
-		{
-            WaterJumpDetector.SetSpace(RootNode);
-            WaterJumpDetector.QueryParameters.CollisionMask = RootNode.CollisionMask;
-        };
         RootNode.ChangeShape += PlayerShape.OnChangeShape;
 	}
 
