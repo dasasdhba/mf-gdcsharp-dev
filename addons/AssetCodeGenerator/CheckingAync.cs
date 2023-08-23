@@ -27,7 +27,7 @@ public partial class AssetCodeGenerator : EditorPlugin
 
                 if (!FileAccess.FileExists(respath))
                 {
-                    DirAccess.RemoveAbsolute(ProjectSettings.GlobalizePath(cspath));
+                    DirAccess.RemoveAbsolute(cspath);
 
                     if (changed) { _Changed = true; }
 
