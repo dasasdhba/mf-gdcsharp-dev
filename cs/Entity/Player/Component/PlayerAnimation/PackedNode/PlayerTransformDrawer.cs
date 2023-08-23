@@ -11,7 +11,7 @@ public partial class PlayerTransformDrawer : Draw2D
     /// <summary>
     /// The PlayerStateAnimation Node.
     /// </summary>
-    [ExportCategory("PlayerAnimationTransform")]
+    [ExportCategory("PlayerTransformDrawer")]
     [Export]
     public PlayerStateAnimation StateAnimation { get; set; }
 
