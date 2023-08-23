@@ -18,6 +18,7 @@ public partial class PlayerPlatformerBody : PlatformerBody2D
     /// when colliding with a wall and near the floor.
     /// </summary>
     public float OnWallFixLength { get; set; } = 8f;
+    private static readonly float OnWallFixSafeMargin = 4f;
 
     public StateMachine<PlayerPlatformerBody> MainStateMachine { get; set; }
         = new(MainState);
@@ -75,10 +76,10 @@ public partial class PlayerPlatformerBody : PlatformerBody2D
 
         if (GravitySpeed >= 0f && OnWallFixLength > 0f && IsOnWall())
         {
-            Transform2D TestTransform = GlobalTransform;
-            TestTransform.Origin += MFSpeedParam.Direction * -UpDirection.Orthogonal();
-            TestTransform.Origin += OnWallFixLength * UpDirection;
-            if (!TestMove(TestTransform, new Vector2(0f, 0f)))
+            Transform2D testTransform = GlobalTransform;
+            testTransform.Origin += OnWallFixLength * UpDirection;
+            Vector2 testMotion = OnWallFixSafeMargin * MFSpeedParam.Direction * -UpDirection.Orthogonal();
+            if (!TestMove(testTransform, testMotion))
             {
                 SetWalkSpeed();
                 GlobalPosition += (float)(WalkParam.GetSpeed() * delta) * -UpDirection.Orthogonal();
