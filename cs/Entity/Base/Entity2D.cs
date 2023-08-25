@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System;
+using Godot;
 using Spawner;
 using GlobalClass;
 
@@ -82,6 +83,20 @@ public abstract partial class Entity2D
     /// This should be set up by <c>Bind(root, true)</c>.
     /// </summary>
     public Node Root { get; private set; }
+
+    // events
+
+    /// <summary>
+    /// Emitted after <c>SetComponents()</c> is called.
+    /// </summary>
+    public Action ComponentsReady;
+    protected virtual void OnComponentsReady() => ComponentsReady?.Invoke();
+
+    /// <summary>
+    /// Emitted after <c>EnterTree(parent)</c> is called.
+    /// </summary>
+    public Action TreeEntered;
+    protected virtual void OnTreeEntered() => TreeEntered?.Invoke();
 
     /// <summary>
     /// Ensure getting the right container.
@@ -196,7 +211,9 @@ public abstract partial class Entity2D
         Inited = true;
 
         SetComponents();
+        OnComponentsReady();
         EnterTree(parent);
+        OnTreeEntered();
 
         EntityInit();
     }
