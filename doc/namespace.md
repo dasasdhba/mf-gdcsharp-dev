@@ -5,6 +5,11 @@ The `namespace` list of this project.
 * `Utils`: Collection of helpful tool functions.
 * `GlobalClass`: Collection of custom Godot editor classes.
 
+The global Game namespace.
+
+* `Game`: Global game systems and constants.
+* `Game.Const`: Global game constants.
+
 The Component namepace.
 
 * `Component`: Collection of the base class of components mainly used by Entity.

@@ -3,6 +3,7 @@ using GlobalClass;
 using Component;
 using Asset;
 using Asset.Audio;
+using Game.Const;
 
 namespace Entity.Player;
 
@@ -49,9 +50,11 @@ public partial class PlayerPlatformer : Player
 
 		// root node
 		RootNode = new PlayerPlatformerBody()
-        {
+		{
 			Transform = Transform,
 			GravityParam = new AccelerationParam(2500f, 2500f, 500f),
+			CollisionLayer = Physics.PlayerLayer,
+			CollisionMask = Physics.PlayerMask,
 		};
 		Bind(RootNode, true);
 
