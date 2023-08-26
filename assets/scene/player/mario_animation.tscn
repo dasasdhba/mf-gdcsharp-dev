@@ -183,21 +183,23 @@ metadata/_edit_group_ = true
 
 [node name="Small" type="AnimatedSprite2D" parent="StateAnimation"]
 material = SubResource("ShaderMaterial_dkc08")
+position = Vector2(0, -2)
 sprite_frames = ExtResource("3_nju83")
 animation = &"Idle"
 script = ExtResource("4_f3ahs")
 
 [node name="Super" type="AnimatedSprite2D" parent="StateAnimation"]
 material = SubResource("ShaderMaterial_dkc08")
-position = Vector2(0, -16)
+position = Vector2(0, -18)
 sprite_frames = ExtResource("5_alwdl")
 animation = &"Idle"
 script = ExtResource("4_f3ahs")
 State = 1
 
-[node name="StateTransform" type="Node2D" parent="."]
+[node name="StateTransform" type="Node2D" parent="." node_paths=PackedStringArray("StateAnimation")]
 visible = false
 script = ExtResource("6_w35mq")
+StateAnimation = NodePath("../StateAnimation")
 MaxDrawingTask = 1
 
 [node name="Animation" type="AnimationPlayer" parent="." node_paths=PackedStringArray("StateAnimation")]
