@@ -10,7 +10,7 @@ namespace GlobalClass;
 [GlobalClass]
 public partial class AnimatedSpriteOffset2D :AnimatedSprite2D
 {
-    [ExportCategory("AnimatedSpriteOffset")]
+    [ExportCategory("AnimatedSpriteOffset2D")]
 
     [Export]
     public Vector2 BaseOffset
