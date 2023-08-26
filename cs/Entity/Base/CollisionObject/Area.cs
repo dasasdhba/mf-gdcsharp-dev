@@ -10,12 +10,12 @@ public partial class Area : Entity2D
     /// <summary>
     /// <c>Area2D</c> root node.
     /// </summary>
-    public Area2D AreaNode { get; set; } = new();
+    public virtual Area2D AreaNode { get; set; } = new();
 
     /// <summary>
     /// Collision shape of <c>Area2D</c> node.
     /// </summary>
-    public CollisionShape2D Shape { get; set; } = new()
+    public virtual CollisionShape2D Shape { get; set; } = new()
     {
         Shape = new RectangleShape2D() { Size = new Vector2(32f, 32f) }
     };

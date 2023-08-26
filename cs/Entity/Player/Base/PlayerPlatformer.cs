@@ -1,9 +1,7 @@
 using Godot;
-using GlobalClass;
 using Component;
 using Asset;
 using Asset.Audio;
-using Game.Const;
 
 namespace Entity.Player;
 
@@ -13,8 +11,8 @@ namespace Entity.Player;
 public partial class PlayerPlatformer : Player
 {
 	// Components
-	public PlayerPlatformerBody RootNode { get; set; }
-	public PlayerCollisionShape PlayerShape { get; set; } = new();
+	public virtual PlayerPlatformerBody RootNode { get; set; } = new();
+	public virtual PlayerCollisionShape PlayerShape { get; set; } = new();
 
     // audio
     public AudioStreamManager Audio { get; set; }
@@ -49,20 +47,13 @@ public partial class PlayerPlatformer : Player
 		AccessGlobalData();
 
 		// root node
-		RootNode = new PlayerPlatformerBody()
-		{
-			Transform = Transform,
-			GravityParam = new AccelerationParam(2500f, 2500f, 500f),
-			CollisionLayer = Physics.PlayerLayer,
-			CollisionMask = Physics.PlayerMask,
-		};
 		Bind(RootNode, true);
 
-		// set up audio
-		AudioInit();
+		// shape
+        RootNode.ChangeShape += PlayerShape.ChangeShape;
 
-        // event subscribe
-        RootNode.ChangeShape += PlayerShape.OnChangeShape;
+        // audio
+        AudioInit();
 	}
 
     protected override void EnterTree(Node parent)
