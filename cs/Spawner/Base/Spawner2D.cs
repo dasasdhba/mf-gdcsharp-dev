@@ -6,6 +6,15 @@ using Utils;
 namespace Spawner;
 
 /// <summary>
+/// Spawner2D&lt;T&gt; spawns Entity2D T.
+/// </summary>
+/// <typeparam name="T">Entity2D</typeparam>
+public partial class Spawner2D<T> : Spawner2D where T : Entity2D, new()
+{
+    protected override Entity2D Spawn() => new T() { Transform = Transform };
+}
+
+/// <summary>
 /// Spawner2D spawns Entity2D.
 /// </summary>
 public abstract partial class Spawner2D : Node2D
@@ -31,7 +40,8 @@ public abstract partial class Spawner2D : Node2D
     public enum SpawnerProcessCallback
     {
         Idle,
-        Physics
+        Physics,
+        Ready
     }
 
     /// <summary>
@@ -42,10 +52,23 @@ public abstract partial class Spawner2D : Node2D
         SpawnerProcessCallback.Idle;
 
     /// <summary>
+    /// Emitted when entity emits <c>ComponentsReady</c>.
+    /// </summary>
+    public Action<Entity2D> EntityComponentsReady;
+    protected virtual void OnEntityComponentsReady(Entity2D entity) => 
+        EntityComponentsReady?.Invoke(entity);
+
+    /// <summary>
+    /// Emitted when entity emits <c>TreeEntered</c>.
+    /// </summary>
+    public Action<Entity2D> EntityTreeEntered;
+    protected virtual void OnEntityTreeEntered(Entity2D entity) =>
+        EntityTreeEntered?.Invoke(entity);
+
+    /// <summary>
     /// Emitted when spawns the entity.
     /// </summary>
     public Action<Entity2D> Spawned;
-
     protected virtual void OnSpawned(Entity2D entity) => Spawned?.Invoke(entity);
 
     /// <summary>
@@ -54,9 +77,18 @@ public abstract partial class Spawner2D : Node2D
     protected abstract Entity2D Spawn();
 
     /// <summary>
+    /// Init the spawned entity after <c>Entity2D.SetComponents()</c> has been called.
+    /// </summary>
+    protected virtual void EntitySetComponents(Entity2D entity) { }
+
+    /// <summary>
+    /// Init the spawned entity after <c>Entity2D.EnterTree(parent)</c> has been called.
+    /// </summary>
+    protected virtual void EntityEnterTree(Entity2D entity) { }
+
+    /// <summary>
     /// Init the spawned entity after <c>Entity2D.Init()</c> has been called.
     /// </summary>
-    /// <param name="entity"></param>
     protected virtual void EntityInit(Entity2D entity) { }
 
     /// <summary>
@@ -71,6 +103,16 @@ public abstract partial class Spawner2D : Node2D
     {
         Entity2D result = Spawn();
         BindEntity(result);
+        result.ComponentsReady += () =>
+        {
+            EntitySetComponents(result);
+            OnEntityComponentsReady(result);
+        };
+        result.TreeEntered += () =>
+        {
+            EntityEnterTree(result);
+            OnEntityTreeEntered(result);
+        };
         result.Init(GetParent());
         EntityInit(result);
         OnSpawned(result);
