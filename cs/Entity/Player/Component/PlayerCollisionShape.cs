@@ -35,7 +35,7 @@ public partial class PlayerCollisionShape
     /// Change player shape that should be called by event.
     /// </summary>
     /// <param name="state">1 or greater to super, 0 to small, -1 or less to disable.</param>
-    public void OnChangeShape(int state)
+    public void ChangeShape(int state)
     {
         CollisionSmall.Disabled = state != 0;
         CollisionSuper.Disabled = state <= 0;
@@ -54,7 +54,7 @@ public partial class PlayerCollisionShape
         parent.CallDeferred("add_child", CollisionSmall);
         parent.CallDeferred("add_child", CollisionSuper);
         parent.CallDeferred("add_child", OverlappingWaterJump);
-        parent.WaterJumpDetector.AddShape(OverlappingWaterJump);
+        parent.WaterJumpDetectorAddShape(OverlappingWaterJump);
     }
     
 }
