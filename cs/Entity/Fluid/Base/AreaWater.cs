@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Game.Const;
 
 namespace Entity.Fluid;
 
@@ -8,4 +9,11 @@ namespace Entity.Fluid;
 public partial class AreaWater : Area2D
 {
     // water area based on Area2D
+    public AreaWater() : base()
+    {
+        Monitorable = true;
+        Monitoring = false;
+        CollisionLayer = Physics.Obstacle;
+        CollisionMask = 0;
+    }
 }
