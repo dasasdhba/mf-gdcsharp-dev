@@ -1,5 +1,5 @@
 ﻿using System;
-using GlobalClass;
+using Component;
 
 namespace Entity.Player;
 public partial class PlayerPlatformerBody : PlatformerBody2D

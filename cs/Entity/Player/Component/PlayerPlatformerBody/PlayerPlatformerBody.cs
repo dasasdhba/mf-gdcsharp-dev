@@ -2,6 +2,7 @@
 using GlobalClass;
 using Utils;
 using System.Collections.Generic;
+using Game.Const;
 
 namespace Entity.Player;
 
@@ -11,6 +12,8 @@ namespace Entity.Player;
 /// </summary>
 public partial class PlayerPlatformerBody : PlatformerBody2D
 {
+    public override AccelerationParam GravityParam { get; set; } = new(2500f, 2500f, 500f);
+
     // components
     public PlayerData GlobalData
     {
@@ -28,7 +31,10 @@ public partial class PlayerPlatformerBody : PlatformerBody2D
     private PlayerData BufferedData;
 
     public PlayerInputPlatformer InputHandle { get; set; } = new();
-    public OverlapObject2D WaterJumpDetector { get; set; } = new();
+
+    protected OverlapObject2D WaterJumpDetector = new();
+    public void WaterJumpDetectorAddShape(OverlappingShape2D shape) => 
+        WaterJumpDetector.AddShape(shape);
 
     /// <summary>
     /// Direction input map with <c>UpDirection</c>.
@@ -42,6 +48,9 @@ public partial class PlayerPlatformerBody : PlatformerBody2D
 
     public PlayerPlatformerBody() :base() 
     {
+        CollisionLayer = Physics.PlayerLayer;
+        CollisionMask = Physics.PlayerMask;
+
         WaterJumpDetector.QueryParameters.CollideWithAreas = true;
         WaterJumpDetector.QueryParameters.CollideWithBodies = false;
 

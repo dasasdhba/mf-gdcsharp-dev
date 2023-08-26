@@ -1,5 +1,5 @@
 ﻿using Entity.Fluid;
-using GlobalClass;
+using Component;
 using System;
 
 namespace Entity.Player;

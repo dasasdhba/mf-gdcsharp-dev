@@ -1,5 +1,4 @@
 ﻿using Component;
-using GlobalClass;
 using System;
 using Godot;
 
@@ -7,7 +6,6 @@ namespace Entity.Player;
 
 public partial class PlayerPlatformerBody : PlatformerBody2D
 {
-
     /// <summary>
     /// Whether the player is crouch, can not be set from external class.
     /// </summary>
