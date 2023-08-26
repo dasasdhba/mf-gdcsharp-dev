@@ -1,29 +1,19 @@
-﻿using Godot;
-
-namespace GlobalClass;
+﻿namespace Component;
 
 /// <summary>
 /// Accleration Parameter Resource.
 /// Useful for uniformly accelerated linear motion.
 /// </summary>
-[GlobalClass]
-public partial class AccelerationParam : Resource
+public partial class AccelerationParam
 {
     // the default argument is used by MF general enemies 
 
-    [ExportCategory("AccelerationParameter")]
-
-    [Export]
     public float Acceleration { get; set; } = 1000f;
-
-    [Export]
     public float Deceleration { get; set; } = 1000f;
-
-    [Export]
     public float MaxSpeed { get; set; } = 500f;
 
-    public AccelerationParam() :base() { }
-    public AccelerationParam(float acc, float dec, float maxSpeed) :base()
+    public AccelerationParam() { }
+    public AccelerationParam(float acc, float dec, float maxSpeed)
     {
         Acceleration = acc;
         Deceleration = dec;

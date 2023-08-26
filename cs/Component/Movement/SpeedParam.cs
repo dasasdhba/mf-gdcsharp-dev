@@ -1,24 +1,18 @@
 ﻿using System;
-using Godot;
 
-namespace GlobalClass;
+namespace Component;
 
 /// <summary>
 /// Speed Paramater Resource.
 /// Useful for linear motion with two directions.
 /// </summary>
-[GlobalClass]
-public partial class SpeedParam : Resource
+public partial class SpeedParam
 {
-
-    [ExportCategory("SpeedParameter")]
-
     private int _direction = 1;
 
     /// <summary>
     /// Direction will be limited to 1 or -1, setting to 0 will be ignored.
     /// </summary>
-    [Export(PropertyHint.Enum, "Left:-1, Right:1")]
     public int Direction
     {
         get { return _direction; }
@@ -36,7 +30,6 @@ public partial class SpeedParam : Resource
     /// <summary>
     /// Direction will be changed if setting this property to negative.
     /// </summary>
-    [Export]
     public float Speed 
     { 
         get{ return _speed; }
@@ -51,7 +44,7 @@ public partial class SpeedParam : Resource
         }
     }
 
-    public SpeedParam() : base() { }
+    public SpeedParam() { }
 
     /// <summary>
     /// Get speed with direction.

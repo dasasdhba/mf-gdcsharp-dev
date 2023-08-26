@@ -1,56 +1,39 @@
-﻿using Component;
-using Entity.Fluid;
+﻿using Entity.Fluid;
 using Godot;
+using GlobalClass;
 
-namespace GlobalClass;
+namespace Component;
 
-[GlobalClass]
 /// <summary>
 /// 2D Platformer based on CharacterBody2D.
 /// Gravity direction is based on UpDirection.
 /// </summary>
 public partial class PlatformerBody2D : CharacterBody2D
 {
-
-    [ExportCategory("PlatformerBody2D")]
-
-    [Export]
     public float GravitySpeed { get; set; } = 0f;
-
-    [Export]
-    public AccelerationParam GravityParam { get; set; }
-    
-    [Export]
-    public AccelerationParam GravityParamWater { get; set; }
-
-    [Export]
-    public SpeedParam WalkParam { get; set; }
-
-    [Export]
+    public virtual AccelerationParam GravityParam { get; set; } = new();
+    public virtual AccelerationParam GravityParamWater { get; set; } = new(250f, 2125f, 150f);
+    public virtual SpeedParam WalkParam { get; set; } = new();
     public bool GravityEnable { get; set; } = true;
-
-    [Export]
     public bool WalkEnable { get; set; } = true;
 
     // IsInWater handled by WaterDetector in GravityProcess
     public bool IsInWater { get; protected set; } = false;
 
     // water detect
-    private OverlapCollisionSync2D WaterDetector;
+    protected OverlapCollisionSync2D WaterDetector;
 
     public PlatformerBody2D() : base()
     {
-        GravityParam ??= new();
-        GravityParamWater ??= new(250f, 2125f, 150f);
-        WalkParam ??= new();
-
         WaterDetector = new() { SyncObject = this };
-
         WaterDetector.QueryParameters.CollideWithAreas = true;
         WaterDetector.QueryParameters.CollideWithBodies = false;
 
-        TreeEntered += () => WaterDetector.QueryParameters.CollisionMask = CollisionMask;
-        TreeEntered += () => WaterDetector.SetSpace(this);
+        TreeEntered += () =>
+        {
+            WaterDetector.QueryParameters.CollisionMask = CollisionMask;
+            WaterDetector.SetSpace(this);
+        };
     }
 
     /// <summary>
