@@ -10,7 +10,7 @@ public partial class PlayerPlatformerBody : PlatformerBody2D
     /// <summary>
     /// Walk speed in CTF 8-direction unit.
     /// </summary>
-    public SpeedParam MFSpeedParam { get; set; } = new();
+    public SpeedParam MFSpeedParam { get; protected set; } = new();
 
     // walk parameter can not be accessed by external class directly for safety reason
     // consider using Set/GetMFWalkParam() instead
@@ -78,6 +78,38 @@ public partial class PlayerPlatformerBody : PlatformerBody2D
     }
 
     /// <summary>
+    /// Set walk speed with real param.
+    /// </summary>
+    public void SetRealWalkSpeed(float speed)
+    {
+        WalkParam.Speed = speed;
+        SetMFSpeed();
+    }
+
+    /// <summary>
+    /// Set walk speed with mf param.
+    /// </summary>
+    public void SetMFWalkSpeed(float speed)
+    {
+        MFSpeedParam.Speed = speed;
+        SetWalkSpeed();
+    }
+
+    /// <summary>
+    /// Set walk direction without reset speed.
+    /// </summary>
+    public void SetWalkDirection(int dir)
+    {
+        WalkParam.Direction = dir;
+        MFSpeedParam.Direction = dir;
+    }
+
+    /// <summary>
+    /// Change walk direction without reset speed.
+    /// </summary>
+    public void ChangeWalkDirection() => SetWalkDirection(MFSpeedParam.Direction * -1);
+
+    /// <summary>
     /// Convert MF Speed Param to real one. See
     /// <see href="https://www.marioforever.net/thread-2734-1-1.html">Mario Forever Community</see>
     /// for more information.
@@ -134,5 +166,5 @@ public partial class PlayerPlatformerBody : PlatformerBody2D
     }
 
     // clear
-    protected void ClearWalk() => MFSpeedParam.Speed = 0f;
+    protected void ClearWalkSpeed() => SetMFWalkSpeed(0f);
 }
