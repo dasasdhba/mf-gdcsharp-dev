@@ -81,13 +81,15 @@ public abstract partial class Entity2D
     /// <summary>
     /// The root node in the SceneTree of the entity.
     /// This should be set up by <c>Bind(root, true)</c>.
+    /// If the root node is Node2D, then its transform will be automatically
+    /// set from entity's transform property after <c>SetComponents()</c> is called.
     /// </summary>
     public Node Root { get; private set; }
 
     // events
 
     /// <summary>
-    /// Emitted after <c>SetComponents()</c> is called.
+    /// Emitted after <c>SetComponents()</c> is called and transform is inherited.
     /// </summary>
     public Action ComponentsReady;
     protected virtual void OnComponentsReady() => ComponentsReady?.Invoke();
@@ -211,6 +213,7 @@ public abstract partial class Entity2D
         Inited = true;
 
         SetComponents();
+        if (Root is Node2D root2D) { root2D.Transform = Transform; }
         OnComponentsReady();
         EnterTree(parent);
         OnTreeEntered();

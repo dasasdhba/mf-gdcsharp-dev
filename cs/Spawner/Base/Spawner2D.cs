@@ -11,7 +11,7 @@ namespace Spawner;
 /// <typeparam name="T">Entity2D</typeparam>
 public partial class Spawner2D<T> : Spawner2D where T : Entity2D, new()
 {
-    protected override Entity2D Spawn() => new T() { Transform = Transform };
+    protected override Entity2D Spawn() => new T();
 }
 
 /// <summary>
@@ -102,6 +102,7 @@ public abstract partial class Spawner2D : Node2D
     public Entity2D Respawn()
     {
         Entity2D result = Spawn();
+        result.Transform = Transform;
         BindEntity(result);
         result.ComponentsReady += () =>
         {
