@@ -19,6 +19,10 @@ The plugin will convert the resource file name to PascalCase and use it as class
 
 If a resource file has been removed or renamed, the specific generated cs script file will also be removed. Pay attention to potential invalid references if this happens.
 
+### Known issue
+
+* Remove the invalid cs scripts will cause editor error since the scripts have been imported before. (Is there any way to refresh imported resource or just prevent godot to import this non-editor scripts?) This will not make the editor crash or unusable, so it may not matter a lot.
+
 ## Spawner-TSCN Generator
 
 This is still a planning item, which may help generate tscn files for concrete spawners so that we can easily use them in level editor.

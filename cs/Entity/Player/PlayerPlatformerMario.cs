@@ -14,6 +14,7 @@ public partial class PlayerPlatformerMario : PlayerPlatformer, ISprite2D
     public PlayerPlatformerMario() : base()
     {
         GlobalData.PlayerName = "Mario";
+        GlobalData.PlayerState = PlayerData.State.Super; // debug only
     }
 
     protected override void SetComponents()

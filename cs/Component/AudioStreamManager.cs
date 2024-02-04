@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace Component;
 
+// TODO: the sound will stuck a little on playing sometimes,
+// maybe we need to keep the player node if necessary.
+
 /// <summary>
 /// AudioStream manager component.
 /// Useful for entity to manage and play audio.

@@ -1,8 +1,10 @@
 # Introduction
 
-**This project is still in early development.**
+## This project is archived
 
-You can read the documents under the folder `res:\\doc` for more information.
+See <https://www.marioforever.net/thread-2834-1-1.html> for details. If you are still interested in this project, you can read the documents under the folder `res:\\doc` for more information. 
+
+The followings are original introductions.
 
 ## Workflow
 

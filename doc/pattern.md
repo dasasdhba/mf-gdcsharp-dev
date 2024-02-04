@@ -44,6 +44,6 @@ The pitfalls summarized by the Godot official document is not enouch for me, so 
 
 2. Before making change for exported resource in inspector, don't forget create a new resource, or all the change will be ignored.
 
-3. You can't assign a default value to an exported custom resource in C# currently, see: <https://github.com/godotengine/godot/issues/80175>
+3. You can't assign a default value to an exported custom resource in C# in project's Godot version, see: <https://github.com/godotengine/godot/issues/80175>
 
 4. Godot.Variant is a struct, which means even if a `Godot.Variant` `variant` contains a `GodotObject` for example, the statement `variant is GodotObject` will alwasy be `false` and `variant as GodotObject` will be null. But unsafely cast `(GodotObject)variant` works.
